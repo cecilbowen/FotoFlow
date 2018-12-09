@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="700.0" maxWidth="1100.0" minHeight="700.0" minWidth="1100.0" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creator.FXMLController">
+  <children>
+    <MenuBar layoutY="2.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#handleImportImageButtonAction" text="Import Photo Directory" />
+            <MenuItem mnemonicParsing="false" onAction="#handleImportSoundDirectory" text="Import Sound Directory" />
+            <MenuItem mnemonicParsing="false" onAction="#handleExportButtonAction" text="Export" />
+            <MenuItem mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#handleHelpButtonClicked" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.1621129326047359" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <items>
+        <SplitPane dividerPositions="0.6602086438152012" maxWidth="175.0" minWidth="175.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="175.0">
+          <items>
+            <ListView fx:id="soundListView" prefHeight="409.0" prefWidth="175.0" style="-fx-background-color: #5576aa;" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="66.0" text="Options" AnchorPane.topAnchor="6.0" />
+                <Group layoutX="35.0" layoutY="23.0">
+                  <children>
+                    <ToggleButton mnemonicParsing="false" onAction="#handleManualButtonAction" selected="true" text="Manual">
+                      <toggleGroup>
+                        <ToggleGroup fx:id="TimerGroup" />
+                      </toggleGroup>
+                    </ToggleButton>
+                    <ToggleButton layoutX="55.0" mnemonicParsing="false" onAction="#handleTimerButtonAction" text=" Timer" toggleGroup="$TimerGroup" />
+                  </children>
+                </Group>
+                <TextField fx:id="textField" layoutX="13.0" layoutY="75.0" onKeyPressed="#handleTimerInputAction" onKeyReleased="#handleTimerInputAction" text="5" />
+                <Label layoutX="21.0" layoutY="58.0" text="Set Timer (Seconds):" />
+                <Button layoutX="13.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleHelpButtonClicked" prefHeight="37.0" prefWidth="149.0" text="Help" />
+                <Text fx:id="responseLabel" layoutX="41.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="104.263671875" />
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+        <SplitPane dividerPositions="0.5007451564828614" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+          <items>
+            <ScrollPane fx:id="scrollPaneBrowser" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefHeight="399.0" prefWidth="917.0" vbarPolicy="NEVER">
+              <content>
+                <HBox id="upperPane" fx:id="stageImagePane" prefHeight="266.0" prefWidth="916.0" style="-fx-background-color: #5576aa;" />
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="scrollPaneTimeline" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefViewportHeight="28.0" prefViewportWidth="917.0" vbarPolicy="NEVER">
+              <content>
+                <HBox>
+                  <children>
+                    <SplitPane dividerPositions="0.11890243902439024" orientation="VERTICAL">
+                      <items>
+                        <HBox fx:id="soundPane" prefHeight="35.0" prefWidth="917.0" style="-fx-background-color: grey;" />
+                        <HBox fx:id="slidePane" maxHeight="323.0" minHeight="286.0" prefHeight="286.0" prefWidth="10000.0" style="-fx-background-color: grey;" />
+                      </items>
+                    </SplitPane>
+                  </children>
+                </HBox>
+              </content>
+            </ScrollPane>
+          </items>
+        </SplitPane>
+      </items>
+    </SplitPane>
+    <AnchorPane fx:id="helpPane" prefHeight="692.0" prefWidth="1089.0" style="-fx-background-color: lightgrey;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <children>
+        <Button layoutX="803.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleHelpButtonCloseClicked" prefHeight="77.0" prefWidth="235.0" text="Close" />
+        <Button layoutX="562.0" layoutY="569.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="228.0" text="Donate To Patreon" />
+        <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="14.0" prefHeight="531.0" prefWidth="1069.0">
+          <content>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;">
+              <children>
+                <ImageView id="1-2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/1-2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="3.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/3.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="4.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/4.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="5.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/5.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="6.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/6.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Audio1.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Audio1.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Audio2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Audio2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Audio3.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Audio3.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Audio4.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Audio4.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Audio5.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Audio5.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Transitions1.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Transitions1.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Transitions2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Transitions2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Transitions3.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Transitions3.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Timing1.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Timing1.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Timing2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Timing2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="AutoTiming1.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/AutoTiming1.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="AutoTiming2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/AutoTiming2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="AutoTiming3.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/AutoTiming3.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="Exporting.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/Exporting.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="OpeningFile.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/OpeningFile.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="OpeningFile2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/OpeningFile2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="PlayingPresentation.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/PlayingPresentation.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides1.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides1.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides1_2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides1_2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides2.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides2.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides3.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides3.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides4.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides4.PNG" />
+                  </image>
+                </ImageView>
+                <ImageView id="ControllingSlides5.PNG">
+                  <image>
+                    <Image preserveRatio="true" smooth="true" url="@../HelpImages/ControllingSlides5.PNG" />
+                  </image>
+                </ImageView>
+              </children>
+            </VBox>
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+  </children>
+</AnchorPane>

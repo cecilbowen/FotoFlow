@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="550.0" prefWidth="880.0" style="-fx-background-color: FFFFFF;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <BorderPane fx:id="borderPaneSlideCanvas" prefHeight="337.0" prefWidth="77.0" />
+      <BorderPane fx:id="borderPaneSlideTransition" disable="true" prefHeight="200.0" prefWidth="200.0" />
+    <BorderPane fx:id="borderPaneControls" onContextMenuRequested="#showDebugMenu" opacity="0.73" prefHeight="550.0" prefWidth="894.0">
+        <bottom>
+            <Pane fx:id="paneSlideshowControls" onMouseEntered="#showControls_button" onMouseExited="#hideControls_button" opacity="0.85" prefHeight="104.0" prefWidth="894.0" style="-fx-background-radius: 10; -fx-background-color: C0C0C0;" BorderPane.alignment="CENTER">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <children>
+                    <Button fx:id="btnPlay" layoutX="421.0" layoutY="40.0" mnemonicParsing="false" onAction="#play_button" text="Pause" />
+                    <Button fx:id="btnNext" disable="true" layoutX="475.0" layoutY="40.0" mnemonicParsing="false" onAction="#next_button" text="Next Slide" />
+                    <Button fx:id="btnPrevious" disable="true" layoutX="312.0" layoutY="40.0" mnemonicParsing="false" onAction="#previous_button" text="Previous Slide" />
+                    <Slider fx:id="sliderVolume" layoutX="672.0" layoutY="45.0" value="50.0" />
+                    <Button fx:id="btnStop" layoutX="60.0" layoutY="40.0" mnemonicParsing="false" onAction="#stop_button" text="Stop Slideshow" />
+                    <Label fx:id="labelCounter" layoutX="211.0" layoutY="35.0" text="0/0">
+                        <font>
+                           <Font name="System Bold" size="24.0" />
+                        </font>
+                    </Label>
+                    <Button fx:id="btnFullscreen" layoutX="565.0" layoutY="40.0" mnemonicParsing="false" onAction="#toggleFullscreen_button" text="Fullscreen" />
+                  <ProgressBar fx:id="progressBarInterval" layoutX="157.0" layoutY="70.0" prefHeight="18.0" prefWidth="152.0" progress="0.0" />
+                </children>
+            </Pane>
+        </bottom>
+        <center> 
+            <Button fx:id="btnStartSlideshow" defaultButton="true" onAction="#startSlideshow_button" prefHeight="104.0" prefWidth="323.0" text="Start Slideshow" BorderPane.alignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="36.0" />
+                </font>
+            </Button>
+        </center>
+    </BorderPane>
+    </children>
+</fx:root>
